@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="cyan">#48a8a3</color>
+    <color name="grey">#a1a1a1</color>
+    <color name="dark_cyan">#50918e</color>
+    <color name="dark_blue">#1a4c93</color>
+    <color name="light_blue">#009fe3</color>
+    <color name="grayMenuDivider">#1ad3d3d3</color>
+    <color name="graySlideMenu">#eeeeee</color>
+    <color name="red">#da251c</color>
+    <color name="green">#43bc41</color>
+    <color name="pink">#ef4878</color>
+    <color name="orange">#ffb74e</color>
+    <color name="disable">#aaaaaa</color>
+    <color name="font">#444444</color>
+    <color name="blue">#5ab1ad</color>
+    <color name="light_green">#3baf24</color>
+    <color name="purple">#8f3d6e</color>
+    <color name="progress_pink">#ef4878</color>
+    <color name="progress_grey">#aaaaaa</color>
+    <color name="transparent_white">#b1ffffff</color>
+
+    <!--Material Color List-->
+    <!--RED-->
+    <color name="red_100">#ffcdd2</color>
+    <color name="red_300">#e57373</color>
+    <color name="red_500">#f44336</color>
+    <color name="red_700">#d32f2f</color>
+    <color name="red_900">#b71c1c</color>
+    <!--PINK-->
+    <color name="pink_100">#fce4ec</color>
+    <color name="pink_300">#f06292</color>
+    <color name="pink_500">#e91e63</color>
+    <color name="pink_700">#c2185b</color>
+    <color name="pink_900">#880e4f</color>
+    <!--INDIGO-->
+    <color name="indigo_100">#c5cae9</color>
+    <color name="indigo_300">#7986cb</color>
+    <color name="indigo_500">#3f51b5</color>
+    <color name="indigo_700">#303f9f</color>
+    <color name="indigo_900">#1a237e</color>
+    <!--BLUE-->
+    <color name="blue_100">#bbdefb</color>
+    <color name="blue_300">#64b5f6</color>
+    <color name="blue_500">#2196f3</color>
+    <color name="blue_700">#1976d2</color>
+    <color name="blue_900">#0d47a1</color>
+    <!--GREEN-->
+    <color name="green_100">#c8e6c9</color>
+    <color name="green_300">#81c784</color>
+    <color name="green_500">#4caf50</color>
+    <color name="green_700">#388e3c</color>
+    <color name="green_900">#1b5e20</color>
+    <!--CYAN-->
+    <color name="cyan_100">#b2ebf2</color>
+    <color name="cyan_300">#4dd0e1</color>
+    <color name="cyan_500">#00bcd4</color>
+    <color name="cyan_700">#0097a7</color>
+    <color name="cyan_900">#006064</color>
+</resources>
