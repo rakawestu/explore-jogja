@@ -2,12 +2,17 @@ package com.github.rakawestu.explorejogja.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.github.rakawestu.explorejogja.R;
 import com.github.rakawestu.explorejogja.app.BaseActivity;
+import com.github.rakawestu.explorejogja.domain.model.Category;
 import com.github.rakawestu.explorejogja.domain.model.Place;
+import com.github.rakawestu.explorejogja.domain.model.SubCategory;
+import com.github.rakawestu.explorejogja.ui.reactive.CategorySelectedObservable;
+import com.github.rakawestu.explorejogja.ui.reactive.CategorySelectedObserver;
 import com.github.rakawestu.explorejogja.ui.reactive.PlaceSelectedObservable;
 import com.github.rakawestu.explorejogja.ui.reactive.PlaceSelectedObserver;
 
@@ -22,21 +27,14 @@ import javax.inject.Inject;
  *
  * @author rakawm
  */
-public class MainActivity extends BaseActivity implements PlaceSelectedObserver{
+public class MainActivity extends BaseActivity implements CategorySelectedObserver{
     public static final String TAG_PORTRAIT = "V11-portrait";
 
     @Inject
-    PlaceSelectedObservable placeSelectedObservable;
+    CategorySelectedObservable categorySelectedObservable;
 
     //The viewTag is the key for the navigation with different sizes
     private String viewTag;
-
-    @Override
-    public void placeSelected(Place place) {
-        if (viewTag.equals(TAG_PORTRAIT)) {
-            //launchCharacterInfoActivity(place);
-        }
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,22 +47,25 @@ public class MainActivity extends BaseActivity implements PlaceSelectedObserver{
     @Override
     protected void onResume() {
         super.onResume();
-        placeSelectedObservable.register(this);
+        categorySelectedObservable.register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        placeSelectedObservable.unregister(this);
+        categorySelectedObservable.unregister(this);
     }
 
     //TODO Change to navigator class with activity context
-    private void launchCharacterInfoActivity(Place place) {
-        /*Intent intent = new Intent(this, ModelInfoActivity.class);
-        Parcelable parcelable = Parcels.wrap(marvelCharacter);
-        intent.putExtra(ModelInfoActivity.KEY_CHARACTER, parcelable);
-        startActivity(intent);*/
+    private void launchCharacterInfoActivity(Category category) {
+        Intent intent = new Intent(this, SubCategoryActivity.class);
+        intent.putExtra(SubCategoryActivity.KEY_CATEGORY, category.getId());
+        startActivity(intent);
     }
 
 
+    @Override
+    public void categorySelected(Category category) {
+        launchCharacterInfoActivity(category);
+    }
 }

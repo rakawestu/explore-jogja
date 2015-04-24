@@ -10,6 +10,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.SubCategoryActivity"
+            android:parentActivityName=".ui.activity.MainActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -4,9 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 
 import com.github.rakawestu.explorejogja.app.ExploreJogjaApp;
-import com.github.rakawestu.explorejogja.ui.PlaceListFragment;
+import com.github.rakawestu.explorejogja.ui.activity.SubCategoryActivity;
+import com.github.rakawestu.explorejogja.ui.fragment.CategoryListFragment;
+import com.github.rakawestu.explorejogja.ui.fragment.PlaceListFragment;
 import com.github.rakawestu.explorejogja.ui.activity.MainActivity;
+import com.github.rakawestu.explorejogja.ui.fragment.SubCategoryListFragment;
+import com.github.rakawestu.explorejogja.ui.presenter.CategoryListPresenterImpl;
 import com.github.rakawestu.explorejogja.ui.presenter.PlaceListPresenterImpl;
+import com.github.rakawestu.explorejogja.ui.presenter.SubCategoryListPresenterImpl;
 
 import javax.inject.Singleton;
 
@@ -27,9 +32,13 @@ import dagger.Provides;
         injects = {
                 ExploreJogjaApp.class,
                 PlaceListFragment.class,
+                CategoryListFragment.class,
+                SubCategoryListFragment.class,
+                SubCategoryListPresenterImpl.class,
+                CategoryListPresenterImpl.class,
                 PlaceListPresenterImpl.class,
                 MainActivity.class,
-                MainActivity.class
+                SubCategoryActivity.class
         },
         library = true
 )

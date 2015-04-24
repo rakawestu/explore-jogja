@@ -6,13 +6,19 @@ import org.parceler.Parcel;
  * @author rakawm
  */
 @Parcel
-public class Category {
+public class SubCategory {
     String id;
-    String tipe;
+    String subtipe;
     String image;
 
-    public Category(){
+    public SubCategory(){
 
+    }
+
+    public SubCategory(String id, String subtipe, String image){
+        this.id = id;
+        this.subtipe = subtipe;
+        this.image = image;
     }
 
     public String getId() {
@@ -23,12 +29,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getTipe() {
-        return tipe;
+    public String getSubtipe() {
+        return subtipe;
     }
 
-    public void setTipe(String tipe) {
-        this.tipe = tipe;
+    public void setSubtipe(String subtipe) {
+        this.subtipe = subtipe;
     }
 
     public String getImage() {
@@ -36,12 +42,6 @@ public class Category {
     }
 
     public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Category(String id, String tipe, String image){
-        this.id = id;
-        this.tipe = tipe;
         this.image = image;
     }
 }

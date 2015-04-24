@@ -1,6 +1,8 @@
 package com.github.rakawestu.explorejogja.app.dependencyinjection;
 
+import com.github.rakawestu.explorejogja.ui.reactive.CategorySelectedObservable;
 import com.github.rakawestu.explorejogja.ui.reactive.PlaceSelectedObservable;
+import com.github.rakawestu.explorejogja.ui.reactive.SubCategorySelectedObservable;
 
 import javax.inject.Singleton;
 
@@ -19,5 +21,17 @@ public class ReactiveModule {
     @Provides
     PlaceSelectedObservable proviPlaceSelectedObservable() {
         return new PlaceSelectedObservable();
+    }
+
+    @Singleton
+    @Provides
+    CategorySelectedObservable proviCategorySelectedObservable() {
+        return new CategorySelectedObservable();
+    }
+
+    @Singleton
+    @Provides
+    SubCategorySelectedObservable proviSubCategorySelectedObservable() {
+        return new SubCategorySelectedObservable();
     }
 }

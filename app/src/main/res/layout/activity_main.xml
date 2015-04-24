@@ -8,7 +8,7 @@
         android:id="@+id/place_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.github.rakawestu.explorejogja.ui.PlaceListFragment">
+        class="com.github.rakawestu.explorejogja.ui.fragment.CategoryListFragment">
 
     </fragment>
 

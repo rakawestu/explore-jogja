@@ -1,19 +1,12 @@
-package com.github.rakawestu.explorejogja.domain.model;
-
-import org.parceler.Parcel;
+package com.github.rakawestu.explorejogja.domain.repository.api.model;
 
 /**
  * @author rakawm
  */
-@Parcel
 public class Category {
-    String id;
-    String tipe;
-    String image;
-
-    public Category(){
-
-    }
+    private String id;
+    private String tipe;
+    private String image;
 
     public String getId() {
         return id;
@@ -36,12 +29,6 @@ public class Category {
     }
 
     public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Category(String id, String tipe, String image){
-        this.id = id;
-        this.tipe = tipe;
         this.image = image;
     }
 }

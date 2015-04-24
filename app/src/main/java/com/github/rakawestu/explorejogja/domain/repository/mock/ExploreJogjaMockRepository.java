@@ -1,6 +1,8 @@
 package com.github.rakawestu.explorejogja.domain.repository.mock;
 
+import com.github.rakawestu.explorejogja.domain.model.Category;
 import com.github.rakawestu.explorejogja.domain.model.Place;
+import com.github.rakawestu.explorejogja.domain.model.SubCategory;
 import com.github.rakawestu.explorejogja.domain.repository.ExploreJogjaRepository;
 import com.github.rakawestu.explorejogja.domain.repository.exception.GetPlaceException;
 
@@ -16,6 +18,16 @@ public class ExploreJogjaMockRepository implements ExploreJogjaRepository{
     @Override
     public List<Place> getPlaceCollection() throws GetPlaceException {
         return generateMockPlaces();
+    }
+
+    @Override
+    public List<Category> getCategoryCollection() throws GetPlaceException {
+        return null;
+    }
+
+    @Override
+    public List<SubCategory> getSubCategoryCollection(int tipe) {
+        return null;
     }
 
     private List<Place> generateMockPlaces() {

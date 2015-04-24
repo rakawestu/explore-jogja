@@ -1,5 +1,6 @@
-package com.github.rakawestu.explorejogja.domain.repository;
+package com.github.rakawestu.explorejogja.domain.repository.api.mapper;
 
+import com.github.rakawestu.explorejogja.domain.model.Category;
 import com.github.rakawestu.explorejogja.domain.model.Place;
 
 import java.util.List;
@@ -10,6 +11,6 @@ import java.util.List;
  *
  * @author rakawm
  */
-public interface ResponseMapper<T> {
-    List<Place> mapResponse(T response);
+public interface PlaceResponseMapper<T> {
+    List<Place> mapPlaceResponse(T response);
 }

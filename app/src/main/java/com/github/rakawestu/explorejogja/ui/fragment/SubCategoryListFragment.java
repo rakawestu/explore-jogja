@@ -1,12 +1,10 @@
-package com.github.rakawestu.explorejogja.ui;
+package com.github.rakawestu.explorejogja.ui.fragment;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +12,15 @@ import android.widget.ProgressBar;
 
 import com.github.rakawestu.explorejogja.R;
 import com.github.rakawestu.explorejogja.app.BaseFragment;
-import com.github.rakawestu.explorejogja.domain.model.PlaceList;
-import com.github.rakawestu.explorejogja.ui.adapter.PlaceModelAdapter;
+import com.github.rakawestu.explorejogja.domain.model.SubCategory;
+import com.github.rakawestu.explorejogja.ui.adapter.CategoryModelAdapter;
 import com.github.rakawestu.explorejogja.ui.custom.recycler.ClickRecyclerView;
-import com.github.rakawestu.explorejogja.ui.presenter.PlaceListPresenter;
-import com.github.rakawestu.explorejogja.ui.view.PlaceListView;
+import com.github.rakawestu.explorejogja.ui.presenter.CategoryListPresenter;
+import com.github.rakawestu.explorejogja.ui.presenter.SubCategoryListPresenter;
+import com.github.rakawestu.explorejogja.ui.view.SubCategoryListView;
 import com.github.rakawestu.explorejogja.ui.viewmodel.PlaceModel;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.SnackbarManager;
-
-import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -35,59 +32,34 @@ import timber.log.Timber;
 /**
  * @author rakawm
  */
-public class PlaceListFragment extends BaseFragment implements PlaceListView{
+public class SubCategoryListFragment extends BaseFragment implements SubCategoryListView{
 
-    private static final String EXTRA_PLACE_COLLECTION = "extraPlaceCollection";
+    public static final String KEY_CATEGORY = "category";
 
     @Inject
-    PlaceListPresenter placeListPresenter;
+    SubCategoryListPresenter subCategoryListPresenter;
 
     @InjectView(R.id.collection_view)
     ClickRecyclerView collectionView;
     @InjectView(R.id.loading)
     ProgressBar loading;
 
-    private PlaceModelAdapter modelAdapter;
+    private CategoryModelAdapter modelAdapter;
     private LinearLayoutManager mLayoutManager;
 
-    /**
-     * In android the view is not a simple view, there is some cases when the functionality of the
-     * view is more than the excepted, in this case for example the view save the state
-     *
-     * @param outState
-     */
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        //Get the actual state of the characters
-        PlaceList placeList = placeListPresenter.getParcelableCollection();
-
-        //Parcel the object to be saved in the bundle
-        Parcelable placesWrapped = Parcels.wrap(placeList);
-
-        //Save the parcelable
-        outState.putParcelable(EXTRA_PLACE_COLLECTION, placesWrapped);
-    }
-
-    @Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            Timber.i("onViewStateRestored");
-            //Get parcelable from bundle
-            Parcelable placesWrapped = savedInstanceState.getParcelable(EXTRA_PLACE_COLLECTION);
-            PlaceList marvelCharacters = Parcels.unwrap(placesWrapped);
-            placeListPresenter.restoreParcelableCollection(marvelCharacters);
-        }
+    public static SubCategoryListFragment newInstance(String category){
+        Bundle args = new Bundle();
+        args.putString(KEY_CATEGORY, category);
+        SubCategoryListFragment fragment = new SubCategoryListFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Timber.i("on create()");
         super.onCreate(savedInstanceState);
-        modelAdapter = new PlaceModelAdapter();
+        modelAdapter = new CategoryModelAdapter();
         mLayoutManager = new LinearLayoutManager(getActivity());
     }
 
@@ -100,16 +72,17 @@ public class PlaceListFragment extends BaseFragment implements PlaceListView{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeCollectionView();
-        placeListPresenter.setView(this);
-        placeListPresenter.onViewCreate();
+        subCategoryListPresenter.setView(this);
+        subCategoryListPresenter.onViewCreate();
 
         if (savedInstanceState == null) {
             Timber.i("First time running");
-            placeListPresenter.initialize();
+            subCategoryListPresenter.initialize();
+            if(getArguments()!=null){
+                subCategoryListPresenter.onSelectedCategory(getArguments().getString(KEY_CATEGORY));
+            }
         }
-
-        addClickListenerToCharacterList();
-
+        //addClickListenerToCharacterList();
     }
 
     private void initializeCollectionView() {
@@ -134,12 +107,12 @@ public class PlaceListFragment extends BaseFragment implements PlaceListView{
     }
 
     @Override
-    public void activateLastPlaceViewListener() {
+    public void activateLastSubCategoryViewListener() {
         enableSearchOnFinish();
     }
 
     @Override
-    public void disableLastPlaceViewListener() {
+    public void disableLastSubCategoryViewListener() {
         disableSearchOnFinish();
     }
 
@@ -178,7 +151,7 @@ public class PlaceListFragment extends BaseFragment implements PlaceListView{
 
             if (lastVisibleItemPosition == modelsCount) {
                 Timber.i("finish scroll!");
-                placeListPresenter.onLastPlaceShowed();
+                subCategoryListPresenter.onLastSubCategoryShown();
             }
         }
     }
@@ -187,7 +160,7 @@ public class PlaceListFragment extends BaseFragment implements PlaceListView{
 
         @Override
         public void onItemClick(RecyclerView parent, View view, int position, long id) {
-            placeListPresenter.onPlaceSelected(position);
+            subCategoryListPresenter.onSubCategorySelected(position);
         }
     }
 

@@ -1,11 +1,14 @@
 package com.github.rakawestu.explorejogja.domain.model;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author rakawm
  */
+@Parcel
 public class CategoryList {
     public List<Category> categories;
 

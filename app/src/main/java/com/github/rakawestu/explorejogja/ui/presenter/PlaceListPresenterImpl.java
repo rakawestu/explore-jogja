@@ -98,7 +98,6 @@ public class PlaceListPresenterImpl extends BasePresenter implements PlaceListPr
                 Timber.e("Error on interactor getPlaceList");
                 placeListView.onError();
                 placeListView.hideLoading();
-                placeListView.onError();
                 placeListView.activateLastPlaceViewListener();
             }
         });
