@@ -16,4 +16,8 @@ public interface ModelListView {
     void add(List<PlaceModel> models);
 
     void remove(PlaceModel model);
+
+    void refresh(boolean needProgress);
+
+    void hideSwipeRefresh();
 }

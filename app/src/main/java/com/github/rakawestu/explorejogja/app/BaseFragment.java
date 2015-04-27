@@ -1,8 +1,7 @@
 package com.github.rakawestu.explorejogja.app;
-
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.View;
 
 import butterknife.ButterKnife;

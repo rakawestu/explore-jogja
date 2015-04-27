@@ -8,6 +8,10 @@ import com.github.rakawestu.explorejogja.domain.interactor.GetSubCategoryList;
 import com.github.rakawestu.explorejogja.domain.model.SubCategoryList;
 import com.github.rakawestu.explorejogja.ui.presenter.CategoryListPresenter;
 import com.github.rakawestu.explorejogja.ui.presenter.CategoryListPresenterImpl;
+import com.github.rakawestu.explorejogja.ui.presenter.DetailsDescriptionPlacePresenter;
+import com.github.rakawestu.explorejogja.ui.presenter.DetailsDescriptionPlacePresenterImpl;
+import com.github.rakawestu.explorejogja.ui.presenter.DetailsInfoPlacePresenter;
+import com.github.rakawestu.explorejogja.ui.presenter.DetailsInfoPlacePresenterImpl;
 import com.github.rakawestu.explorejogja.ui.presenter.PlaceListPresenter;
 import com.github.rakawestu.explorejogja.ui.presenter.PlaceListPresenterImpl;
 import com.github.rakawestu.explorejogja.ui.presenter.SubCategoryListPresenter;
@@ -38,7 +42,17 @@ public class PresenterModule {
     }
 
     @Provides
-    public SubCategoryListPresenter provideSuBCategoryListPresenter(Context context, GetSubCategoryList getSubCategoryList, SubCategorySelectedObservable subCategorySelectedObservable) {
+    public SubCategoryListPresenter provideSubCategoryListPresenter(Context context, GetSubCategoryList getSubCategoryList, SubCategorySelectedObservable subCategorySelectedObservable) {
         return new SubCategoryListPresenterImpl(context, getSubCategoryList, subCategorySelectedObservable);
+    }
+
+    @Provides
+    public DetailsInfoPlacePresenter provideDetailsInfoPlacePresenter(){
+        return new DetailsInfoPlacePresenterImpl();
+    }
+
+    @Provides
+    public DetailsDescriptionPlacePresenter provideDetailsDescriptionPlacePresenter(){
+        return new DetailsDescriptionPlacePresenterImpl();
     }
 }

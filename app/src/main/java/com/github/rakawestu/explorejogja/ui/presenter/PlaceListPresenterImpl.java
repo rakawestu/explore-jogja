@@ -12,6 +12,7 @@ import com.github.rakawestu.explorejogja.ui.viewmodel.PlaceModel;
 import com.github.rakawestu.explorejogja.ui.viewmodel.PlaceViewModel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import timber.log.Timber;
@@ -26,6 +27,7 @@ public class PlaceListPresenterImpl extends BasePresenter implements PlaceListPr
     private PlaceList placeListCollection;
     private PlaceSelectedObservable placeSelectedObservable;
     private Context context;
+    private String subtipe;
 
     public PlaceListPresenterImpl(Context context, GetPlaceList getPlaceList, PlaceSelectedObservable placeSelectedObservable) {
         super(context);
@@ -62,7 +64,8 @@ public class PlaceListPresenterImpl extends BasePresenter implements PlaceListPr
 
     @Override
     public void onSelectedSubCategory(String category) {
-        searchForPlace(category);
+        this.subtipe = category;
+        searchForPlace(category, true);
     }
 
     @Override
@@ -83,11 +86,22 @@ public class PlaceListPresenterImpl extends BasePresenter implements PlaceListPr
 
     @Override
     public void onPlaceSelected(int position) {
-
+        Collection<Place> places = placeListCollection.getPlaceList();
+        Place place = (Place)places.toArray()[position];
+        placeSelectedObservable.notifyObservers(place);
     }
 
-    private void searchForPlace(String subtipe){
-        placeListView.showLoading();
+    @Override
+    public void onRefresh(boolean needRefresh) {
+        placeListCollection = new PlaceList();
+        placeListView.refresh(true);
+        searchForPlace(subtipe, needRefresh);
+    }
+
+    private void searchForPlace(String subtipe, boolean needProgress){
+        if(needProgress){
+            placeListView.showLoading();
+        }
         int subcategory = Integer.valueOf(subtipe);
         getPlaceList.execute(subcategory, new GetPlaceList.Callback() {
             @Override
@@ -95,6 +109,7 @@ public class PlaceListPresenterImpl extends BasePresenter implements PlaceListPr
                 placeListCollection.addAll(placeList);
                 placeListView.add(convertToModelViewList(placeList));
                 placeListView.hideLoading();
+                placeListView.hideSwipeRefresh();
                 placeListView.activateLastPlaceViewListener();
             }
 
@@ -103,6 +118,7 @@ public class PlaceListPresenterImpl extends BasePresenter implements PlaceListPr
                 Timber.e("Error on interactor getPlaceList");
                 placeListView.onError();
                 placeListView.hideLoading();
+                placeListView.hideSwipeRefresh();
                 placeListView.activateLastPlaceViewListener();
             }
         });

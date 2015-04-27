@@ -44,10 +44,9 @@ public class SubCategoryActivity extends BaseActivity implements SubCategorySele
         String categoryId = getIntent().getStringExtra(KEY_CATEGORY);
         //TODO: Go to fragment
         SubCategoryListFragment fragment = SubCategoryListFragment.newInstance(categoryId);
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.frame_sub_category, fragment)
-                .addToBackStack("")
                 .commit();
     }
 

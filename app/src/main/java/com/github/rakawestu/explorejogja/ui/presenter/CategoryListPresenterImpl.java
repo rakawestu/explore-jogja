@@ -41,7 +41,7 @@ public class CategoryListPresenterImpl extends BasePresenter implements Category
     @Override
     public void initialize(){
         categoryListCollection = new CategoryList();
-        searchForCategories();
+        searchForCategories(true);
     }
 
     @Override
@@ -87,14 +87,24 @@ public class CategoryListPresenterImpl extends BasePresenter implements Category
         categorySelectedObservable.notifyObservers(category);
     }
 
-    private void searchForCategories(){
-        categoryListView.showLoading();
+    @Override
+    public void onRefresh(boolean needProgress) {
+        categoryListCollection = new CategoryList();
+        categoryListView.refresh(true);
+        searchForCategories(needProgress);
+    }
+
+    private void searchForCategories(boolean needProgress){
+        if(needProgress){
+            categoryListView.showLoading();
+        }
         getCategoryList.execute(new GetCategoryList.Callback() {
             @Override
             public void onCategoryList(List<Category> categories) {
                 categoryListCollection.add(categories);
                 categoryListView.add(convertToModelViewList(categories));
                 categoryListView.hideLoading();
+                categoryListView.hideSwipeRefresh();
                 categoryListView.activateLastCategoryViewListener();
             }
 
@@ -102,6 +112,7 @@ public class CategoryListPresenterImpl extends BasePresenter implements Category
             public void onError() {
                 Timber.e("Error in interactor GetCategoryList");
                 categoryListView.hideLoading();
+                categoryListView.hideSwipeRefresh();
                 categoryListView.onError();
                 categoryListView.activateLastCategoryViewListener();
             }

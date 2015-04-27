@@ -31,7 +31,7 @@ public class SubCategoryListPresenterImpl extends BasePresenter implements SubCa
     private SubCategoryList subCategoryListCollection;
     private SubCategorySelectedObservable subCategorySelectedObservable;
     private Context context;
-
+    private String tipe;
     public SubCategoryListPresenterImpl(Context context, GetSubCategoryList getSubCategoryList,
                                         SubCategorySelectedObservable subCategorySelectedObservable) {
         super(context);
@@ -42,7 +42,8 @@ public class SubCategoryListPresenterImpl extends BasePresenter implements SubCa
 
     @Override
     public void onSelectedCategory(String category) {
-        searchForSubCategories(category);
+        tipe = category;
+        searchForSubCategories(category, true);
     }
 
     @Override
@@ -69,9 +70,15 @@ public class SubCategoryListPresenterImpl extends BasePresenter implements SubCa
     }
 
     @Override
+    public void onRefresh(boolean needProgress) {
+        subCategoryListCollection = new SubCategoryList();
+        subCategoryListView.refresh(true);
+        searchForSubCategories(tipe, needProgress);
+    }
+
+    @Override
     public void initialize() {
         subCategoryListCollection = new SubCategoryList();
-
     }
 
     @Override
@@ -94,15 +101,18 @@ public class SubCategoryListPresenterImpl extends BasePresenter implements SubCa
         this.subCategoryListView = view;
     }
 
-    private void searchForSubCategories(final String tipe){
+    private void searchForSubCategories(final String tipe, boolean needProgress){
         int type = Integer.valueOf(tipe);
-        subCategoryListView.showLoading();
+        if(needProgress){
+            subCategoryListView.showLoading();
+        }
         getSubCategoryList.execute(type, new GetSubCategoryList.Callback() {
             @Override
             public void onSubCategoryList(List<SubCategory> subCategories) {
                 subCategoryListCollection.add(subCategories);
                 subCategoryListView.add(convertToModelViewList(subCategories));
                 subCategoryListView.hideLoading();
+                subCategoryListView.hideSwipeRefresh();
                 subCategoryListView.activateLastSubCategoryViewListener();
             }
 
@@ -110,6 +120,7 @@ public class SubCategoryListPresenterImpl extends BasePresenter implements SubCa
             public void onError() {
                 Timber.e("Error in interactor GetSubCategoryList");
                 subCategoryListView.hideLoading();
+                subCategoryListView.hideSwipeRefresh();
                 subCategoryListView.onError();
                 subCategoryListView.activateLastSubCategoryViewListener();
             }

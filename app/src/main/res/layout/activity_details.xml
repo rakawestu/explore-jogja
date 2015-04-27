@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+        <com.example.android.common.view.SlidingTabLayout
+            android:id="@+id/sliding_tabs"
+            android:foregroundGravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+        <ImageView
+            android:id="@+id/image_view_place"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/food_drinks_menu"
+            android:contentDescription="@string/image_description_place" />
+        <TextView
+            android:id="@+id/place_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/text_sample_place_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_margin="16dp"
+            android:textColor="@android:color/black"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>

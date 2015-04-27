@@ -2,6 +2,7 @@ package com.github.rakawestu.explorejogja.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +44,8 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
     ClickRecyclerView collectionView;
     @InjectView(R.id.loading)
     ProgressBar loading;
+    @InjectView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private CategoryModelAdapter modelAdapter;
     private LinearLayoutManager mLayoutManager;
@@ -61,7 +64,7 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeCollectionView();
         categoryListPresenter.setView(this);
@@ -70,6 +73,12 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
         if (savedInstanceState == null) {
             Timber.i("First time running");
             categoryListPresenter.initialize();
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    categoryListPresenter.onRefresh(false);
+                }
+            });
         }
 
         addClickListenerToCharacterList();
@@ -131,6 +140,16 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
     @Override
     public void remove(PlaceModel model) {
 
+    }
+
+    @Override
+    public void refresh(boolean needProgress) {
+        modelAdapter = new CategoryModelAdapter();
+    }
+
+    @Override
+    public void hideSwipeRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private class FinishScrollListener extends RecyclerView.OnScrollListener {

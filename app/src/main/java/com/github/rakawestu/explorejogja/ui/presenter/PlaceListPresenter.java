@@ -17,4 +17,6 @@ public interface PlaceListPresenter extends Presenter<PlaceListView>{
     void restoreParcelableCollection(PlaceList placeList);
 
     void onPlaceSelected(int position);
+
+    void onRefresh(boolean needRefresh);
 }

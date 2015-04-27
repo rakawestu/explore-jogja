@@ -3,6 +3,7 @@ package com.github.rakawestu.explorejogja.ui.fragment;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -47,6 +48,8 @@ public class PlaceListFragment extends BaseFragment implements PlaceListView{
     ClickRecyclerView collectionView;
     @InjectView(R.id.loading)
     ProgressBar loading;
+    @InjectView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private PlaceModelAdapter modelAdapter;
     private LinearLayoutManager mLayoutManager;
@@ -118,6 +121,12 @@ public class PlaceListFragment extends BaseFragment implements PlaceListView{
             if(getArguments()!=null){
                 placeListPresenter.onSelectedSubCategory(getArguments().getString(KEY_SUBCATEGORY));
             }
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    placeListPresenter.onRefresh(false);
+                }
+            });
         }
 
         addClickListenerToCharacterList();
@@ -180,6 +189,16 @@ public class PlaceListFragment extends BaseFragment implements PlaceListView{
     @Override
     public void remove(PlaceModel model) {
 
+    }
+
+    @Override
+    public void refresh(boolean needProgress) {
+        modelAdapter = new PlaceModelAdapter();
+    }
+
+    @Override
+    public void hideSwipeRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private class FinishScrollListener extends RecyclerView.OnScrollListener {

@@ -39,9 +39,14 @@ public class PlaceModelAdapter extends RecyclerView.Adapter<PlaceModelAdapter.Vi
         PlaceModel model = models.get(position);
         holder.title.setText(model.getTitle());
         holder.description.setText(model.getDescription());
-        /*Picasso.with(holder.view.getContext())
+        if(model.getImageUrl().startsWith("http://")){
+            Picasso.with(holder.view.getContext())
                 .load(model.getImageUrl())
-                .into(holder.image);*/
+                .into(holder.image);
+        } else {
+            holder.image.setImageResource(R.drawable.no_image);
+        }
+
     }
 
     @Override

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Explore Jogja</string>
     <string name="action_settings">Settings</string>
+    <string name="image_description_place">Image view place</string>
+    <string name="sample_text_place_description">Benteng Vredeburg merupakan loji tertua di Yogyakarta dari keseluruhan kompleks bangunan indis yang ada di Kawasan Titik Nol Km. Benteng yang memiliki bastion di keempat penjurunya ini memiliki koleksi diorama perjuangan bangsa Indonesia untuk meraih kemerdekaan. Pada bulan Juni - Juli, Benteng Vredeburg menjadi lokasi pelaksanaan Festival Kesenian Yogyakarta (FKY). Benteng Vredeburg buka hari Selasa - Minggu dengan tiket masuk Rp 2.000 untuk dewasa dan Rp 1.000 untuk anak-anak.</string>
+    <string name="sample_text_place_info">Price range: 2000\nOpening hours: Selasa &#822; Jumat : 08.00 &#822; 16.00 WIB | Sabtu &#822; Minggu : 08.00 &#822; 17.00 WIB | Hari Senin dan hari libur nasional, tutup.\nTelepon: +62274&#8211;586934, 510996 | fax: +62274&#8211;586934\ web : http://bentengvredeburg.blogspot.com/</string>
+    <string name="text_sample_place_title">Benteng Vredeburg</string>
 </resources>

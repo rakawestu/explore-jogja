@@ -18,4 +18,6 @@ public interface SubCategoryListPresenter extends Presenter<SubCategoryListView>
 
     void onSubCategorySelected(int position);
 
+    void onRefresh(boolean needProgress);
+
 }

@@ -16,4 +16,6 @@ public interface CategoryListPresenter extends Presenter<CategoryListView>{
     void restoreParcelableCollection(CategoryList categoryList);
 
     void onCategorySelected(int position);
+
+    void onRefresh(boolean needProgress);
 }
