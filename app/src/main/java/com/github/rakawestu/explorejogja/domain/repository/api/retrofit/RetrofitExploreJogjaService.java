@@ -15,7 +15,7 @@ public interface RetrofitExploreJogjaService {
     PlaceDataWrapper getPlaceList();
 
     @GET("/api/explore-jogja/tempat")
-    PlaceDataWrapper getPlaceListByCategory(@Query("subtipe") int subtipe);
+    PlaceDataWrapper getPlaceList(@Query("subtipe") int subtipe);
 
     @GET("/api/explore-jogja/tipe")
     CategoryDataWrapper getCategories();

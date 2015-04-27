@@ -38,6 +38,7 @@ import timber.log.Timber;
 public class PlaceListFragment extends BaseFragment implements PlaceListView{
 
     private static final String EXTRA_PLACE_COLLECTION = "extraPlaceCollection";
+    public static final String KEY_SUBCATEGORY = "subcategory";
 
     @Inject
     PlaceListPresenter placeListPresenter;
@@ -49,6 +50,14 @@ public class PlaceListFragment extends BaseFragment implements PlaceListView{
 
     private PlaceModelAdapter modelAdapter;
     private LinearLayoutManager mLayoutManager;
+
+    public static PlaceListFragment newInstance(String subcategory){
+        Bundle args = new Bundle();
+        args.putString(KEY_SUBCATEGORY, subcategory);
+        PlaceListFragment fragment = new PlaceListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     /**
      * In android the view is not a simple view, there is some cases when the functionality of the
@@ -106,6 +115,9 @@ public class PlaceListFragment extends BaseFragment implements PlaceListView{
         if (savedInstanceState == null) {
             Timber.i("First time running");
             placeListPresenter.initialize();
+            if(getArguments()!=null){
+                placeListPresenter.onSelectedSubCategory(getArguments().getString(KEY_SUBCATEGORY));
+            }
         }
 
         addClickListenerToCharacterList();

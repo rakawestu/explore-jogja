@@ -7,6 +7,9 @@ import com.github.rakawestu.explorejogja.ui.view.PlaceListView;
  * @author rakawm
  */
 public interface PlaceListPresenter extends Presenter<PlaceListView>{
+
+    void onSelectedSubCategory(String category);
+
     void onLastPlaceShowed();
 
     PlaceList getParcelableCollection();

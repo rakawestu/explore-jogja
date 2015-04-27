@@ -12,7 +12,7 @@ import java.util.List;
  * @author rakawm
  */
 public interface ExploreJogjaRepository {
-    List<Place> getPlaceCollection() throws GetPlaceException;
+    List<Place> getPlaceCollection(int subtipe) throws GetPlaceException;
 
     List<Category> getCategoryCollection() throws GetPlaceException;
 

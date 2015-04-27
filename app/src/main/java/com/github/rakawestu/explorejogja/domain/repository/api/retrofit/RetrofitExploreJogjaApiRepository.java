@@ -43,9 +43,9 @@ public class RetrofitExploreJogjaApiRepository implements ExploreJogjaRepository
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Place> getPlaceCollection() throws GetPlaceException {
+    public List<Place> getPlaceCollection(int subtipe) throws GetPlaceException {
         try {
-            PlaceDataWrapper placeDataWrapper = exploreJogjaApi.getPlaceList();
+            PlaceDataWrapper placeDataWrapper = exploreJogjaApi.getPlaceList(subtipe);
             //Map response from api to domain model
             return responseMapper.mapPlaceResponse(placeDataWrapper);
         } catch (RetrofitError retrofitError) {

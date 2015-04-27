@@ -82,7 +82,7 @@ public class SubCategoryListFragment extends BaseFragment implements SubCategory
                 subCategoryListPresenter.onSelectedCategory(getArguments().getString(KEY_CATEGORY));
             }
         }
-        //addClickListenerToCharacterList();
+        addClickListenerToCharacterList();
     }
 
     private void initializeCollectionView() {

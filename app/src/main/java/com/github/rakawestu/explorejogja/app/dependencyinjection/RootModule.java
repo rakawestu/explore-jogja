@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 
 import com.github.rakawestu.explorejogja.app.ExploreJogjaApp;
+import com.github.rakawestu.explorejogja.ui.activity.PlaceActivity;
 import com.github.rakawestu.explorejogja.ui.activity.SubCategoryActivity;
 import com.github.rakawestu.explorejogja.ui.fragment.CategoryListFragment;
 import com.github.rakawestu.explorejogja.ui.fragment.PlaceListFragment;
@@ -38,7 +39,8 @@ import dagger.Provides;
                 CategoryListPresenterImpl.class,
                 PlaceListPresenterImpl.class,
                 MainActivity.class,
-                SubCategoryActivity.class
+                SubCategoryActivity.class,
+                PlaceActivity.class
         },
         library = true
 )

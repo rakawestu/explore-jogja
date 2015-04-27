@@ -9,7 +9,7 @@ import java.util.List;
  * @author rakawm
  */
 public interface GetPlaceList {
-    void execute(final Callback callback);
+    void execute(final int subtipe, final Callback callback);
 
     interface Callback {
 

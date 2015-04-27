@@ -15,9 +15,10 @@ import java.util.List;
  * @author rakawm
  */
 public class ExploreJogjaMockRepository implements ExploreJogjaRepository{
+
     @Override
-    public List<Place> getPlaceCollection() throws GetPlaceException {
-        return generateMockPlaces();
+    public List<Place> getPlaceCollection(int subtipe) throws GetPlaceException {
+        return null;
     }
 
     @Override

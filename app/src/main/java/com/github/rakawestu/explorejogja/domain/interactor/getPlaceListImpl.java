@@ -20,6 +20,7 @@ public class GetPlaceListImpl extends AbstractInteractor implements GetPlaceList
 
     private RetrofitExploreJogjaApiRepository repository;
     private Callback callback;
+    private int subtipe;
 
     public GetPlaceListImpl(InteractorExecutor interactorExecutor, MainThreadExecutor mainThreadExecutor,
                             RetrofitExploreJogjaApiRepository exploreJogjaRepository) {
@@ -28,15 +29,16 @@ public class GetPlaceListImpl extends AbstractInteractor implements GetPlaceList
     }
 
     @Override
-    public void execute(Callback callback) {
+    public void execute(final int subtipe, final Callback callback) {
         this.callback = callback;
+        this.subtipe = subtipe;
         getInteractorExecutor().run(this);
     }
 
     @Override
     public void run() {
         try {
-            final List<Place> placeList = repository.getPlaceCollection();
+            final List<Place> placeList = repository.getPlaceCollection(subtipe);
 
             getMainThreadExecutor().execute(new Runnable() {
                 @Override

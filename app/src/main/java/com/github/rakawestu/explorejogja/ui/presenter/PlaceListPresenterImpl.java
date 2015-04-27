@@ -37,7 +37,7 @@ public class PlaceListPresenterImpl extends BasePresenter implements PlaceListPr
     @Override
     public void initialize(){
         placeListCollection = new PlaceList();
-        searchForPlace();
+        //
     }
 
     @Override
@@ -61,6 +61,11 @@ public class PlaceListPresenterImpl extends BasePresenter implements PlaceListPr
     }
 
     @Override
+    public void onSelectedSubCategory(String category) {
+        searchForPlace(category);
+    }
+
+    @Override
     public void onLastPlaceShowed() {
         //searchForPlace();
     }
@@ -81,10 +86,10 @@ public class PlaceListPresenterImpl extends BasePresenter implements PlaceListPr
 
     }
 
-    private void searchForPlace(){
+    private void searchForPlace(String subtipe){
         placeListView.showLoading();
-
-        getPlaceList.execute(new GetPlaceList.Callback() {
+        int subcategory = Integer.valueOf(subtipe);
+        getPlaceList.execute(subcategory, new GetPlaceList.Callback() {
             @Override
             public void onPlaceList(List<Place> placeList) {
                 placeListCollection.addAll(placeList);

@@ -15,6 +15,8 @@ import com.github.rakawestu.explorejogja.ui.viewmodel.PlaceModel;
 import com.github.rakawestu.explorejogja.ui.viewmodel.SubCategoryViewModel;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import timber.log.Timber;
@@ -61,7 +63,9 @@ public class SubCategoryListPresenterImpl extends BasePresenter implements SubCa
 
     @Override
     public void onSubCategorySelected(int position) {
-
+        Collection<SubCategory> subCategoryCollections = subCategoryListCollection.getSubCategories();
+        SubCategory selected = (SubCategory) subCategoryCollections.toArray()[position];
+        subCategorySelectedObservable.notifyObservers(selected);
     }
 
     @Override
